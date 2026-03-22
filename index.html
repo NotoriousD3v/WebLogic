@@ -164,6 +164,10 @@
     .proj-lnk{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue);border-bottom:1px solid rgba(79,126,248,.25);padding-bottom:3px;width:fit-content;transition:color .25s,border-color .25s,gap .25s}
     .proj-lnk:hover{color:var(--violet);border-color:var(--violet);gap:10px}
 
+    /* Proyecto destacado (ocupa todo el ancho) */
+    .proj-card.full{grid-column:1/-1}
+    .proj-card.full .proj-preview{height:320px}
+
     /* CONTACT */
     #contact{padding:120px 24px 100px;text-align:center}
     .cta-tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:24px}
@@ -188,7 +192,7 @@
 
     /* RESPONSIVE */
     @media(max-width:1024px){.stats-g{grid-template-columns:repeat(2,1fr)}.sv-g{grid-template-columns:repeat(2,1fr)}.about-g{grid-template-columns:1fr;gap:48px}}
-    @media(max-width:768px){.nav-links,.nav-cta{display:none}.nav-ham{display:block}.about-g{grid-template-columns:1fr}.proj-g{grid-template-columns:1fr}.proj-hd{flex-direction:column;align-items:flex-start}.sv-g{grid-template-columns:1fr}.ft-in{flex-direction:column;text-align:center}.ft-links{flex-wrap:wrap;justify-content:center}}
+    @media(max-width:768px){.nav-links,.nav-cta{display:none}.nav-ham{display:block}.about-g{grid-template-columns:1fr}.proj-g{grid-template-columns:1fr}.proj-card.full{grid-column:auto}.proj-hd{flex-direction:column;align-items:flex-start}.sv-g{grid-template-columns:1fr}.ft-in{flex-direction:column;text-align:center}.ft-links{flex-wrap:wrap;justify-content:center}}
     @media(max-width:480px){.stats-g{grid-template-columns:1fr}.stat{border-left:none;border-bottom:1px solid var(--border)}.stat:last-child{border-bottom:none}.hero-btns{flex-direction:column;width:100%}.btn-p,.btn-g{width:100%;justify-content:center}.cta-row{flex-direction:column;align-items:center}}
   </style>
 </head>
@@ -413,6 +417,25 @@
           <h3 class="proj-title">Jardín Verde — Tienda</h3>
           <p class="proj-desc">Tienda online de jardinería con catálogo de plantas, herramientas y accesorios. Diseño fresco y natural con carrito de compras y experiencia de usuario fluida.</p>
           <a href="https://jard-nverde-ghq4.vercel.app/" target="_blank" rel="noopener" class="proj-lnk">Ver en vivo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <!-- PROJECT 5: Consultorio Dental (full width) -->
+        <div class="proj-card full rv d5">
+          <div class="proj-img">
+            <div class="proj-preview">
+              <iframe src="https://consultorio-dental-hazel.vercel.app/" title="Consultorio Dental" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
+            </div>
+            <div class="proj-overlay">
+              <a href="https://consultorio-dental-hazel.vercel.app/" target="_blank" rel="noopener" class="visit-btn">
+                Ver sitio en vivo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Salud</span><span class="proj-tag">Clínica Dental</span></div>
+          <h3 class="proj-title">Consultorio Dental</h3>
+          <p class="proj-desc">Sitio web completo para consultorio dental con diseño profesional y cálido. Presenta los servicios, el equipo médico y facilita el agendamiento de citas para atraer y fidelizar pacientes.</p>
+          <a href="https://consultorio-dental-hazel.vercel.app/" target="_blank" rel="noopener" class="proj-lnk">Ver en vivo <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
 
       </div>
