@@ -1,688 +1,252 @@
 <!DOCTYPE html>
-<html lang="es" style="scroll-behavior: smooth;">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebLogic | Portfolio</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <style>
-        :root {
-            /* Colors: Apple Dark Mode + Liquid Aura */
-            --black: #000000;
-            --white: #ffffff;
-            --gray-100: #1d1d1f;
-            --gray-400: #a1a1a6;
-            /* Brighter gray for better contrast */
-            --primary: #0071e3;
-
-            /* Liquid Glass Materials - visionOS style */
-            --glass-bg: rgba(28, 28, 30, 0.5);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-shine: rgba(255, 255, 255, 0.1);
-
-            /* Typography */
-            --font-main: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--black);
-            color: var(--white);
-            font-family: var(--font-main);
-            overflow-x: hidden;
-            /* Liquid Mesh Gradient with high-end texture and overlay for readability */
-            background:
-                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                /* Readability Overlay */
-                radial-gradient(circle at 0% 0%, rgba(0, 113, 227, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
-                url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');
-            background-size: cover;
-            background-attachment: fixed;
-            min-height: 100vh;
-        }
-
-        /* Liquid Glass Utility */
-        .liquid-glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            box-shadow:
-                0 4px 30px rgba(0, 0, 0, 0.1),
-                inset 0 0 0 1px var(--glass-shine);
-        }
-
-        .pill {
-            border-radius: 100px;
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: fit-content;
-            height: 48px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 24px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-        }
-
-        .navbar-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .navbar-logo {
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            text-decoration: none;
-            color: var(--white);
-            margin-right: 16px;
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navbar-links a {
-            text-decoration: none;
-            color: var(--white);
-            font-weight: 500;
-            font-size: 0.85rem;
-            opacity: 0.8;
-            /* Increased opacity */
-            padding: 8px 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .navbar-links a:hover {
-            opacity: 1;
-            color: var(--primary);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-        }
-
-        .btn-primary {
-            background: var(--white);
-            color: var(--black);
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin-left: 12px;
-        }
-
-        .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.05);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding-top: 120px;
-            padding-bottom: 20px;
-            text-align: center;
-        }
-
-        .hero-title {
-            font-weight: 800;
-            font-size: clamp(3.5rem, 12vw, 6rem);
-            line-height: 1.3;
-            /* Increased to accommodate descenders like 'g' */
-            letter-spacing: -3px;
-            color: var(--white);
-            margin-bottom: 24px;
-            /* Adjusted since line-height adds space */
-            padding-bottom: 10px;
-            /* Extra room for descenders */
-            background: linear-gradient(180deg, #fff 40%, rgba(255, 255, 255, 0.6) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1rem, 2.2vw, 1.3rem);
-            font-weight: 500;
-            /* Increased weight */
-            color: #d2d2d7;
-            /* Brighter Apple Gray */
-            max-width: 600px;
-            margin: 0 auto 24px;
-            line-height: 1.5;
-            letter-spacing: -0.2px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-stats .number {
-            color: var(--white);
-        }
-
-        .hero-stats .label {
-            color: var(--gray-400);
-        }
-
-        /* Ticker */
-        .ticker-wrap {
-            margin: 20px 0;
-            padding: 20px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .ticker {
-            display: inline-block;
-            animation: ticker 25s linear infinite;
-        }
-
-        .ticker-item {
-            display: inline-block;
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 500;
-            font-size: 1.1rem;
-            margin: 0 40px;
-            letter-spacing: 2px;
-        }
-
-        @keyframes ticker {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-
-            100% {
-                transform: translate3d(-50%, 0, 0);
-            }
-        }
-
-        /* Projects */
-        .section-title {
-            font-weight: 600;
-            font-size: 3rem;
-            text-align: center;
-            margin: 40px 0 30px;
-            letter-spacing: -1px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .project-card {
-            background: rgba(28, 28, 30, 0.4);
-            border-radius: 40px;
-            overflow: hidden;
-            position: relative;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-            min-height: 600px;
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            background: rgba(40, 40, 45, 0.6);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Browser Mockup */
-        .browser-mockup {
-            width: 100%;
-            height: 380px;
-            background: #1a1a1c;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin-bottom: 24px;
-            pointer-events: none;
-            /* Prevents iframe interaction in grid */
-        }
-
-        .browser-header {
-            height: 28px;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            gap: 6px;
-        }
-
-        .browser-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .browser-mockup iframe {
-            width: 100%;
-            height: calc(100% - 28px);
-            border: none;
-            zoom: 0.6;
-            /* Small scale preview */
-            transform: scale(0.65);
-            transform-origin: 0 0;
-            width: 154%;
-            /* Adjust for scale */
-            height: 154%;
-        }
-
-        .project-content {
-            padding: 10px 20px 20px;
-        }
-
-        .project-tag {
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: var(--primary);
-            margin-bottom: 8px;
-            display: block;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .project-title {
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
-            color: var(--white);
-        }
-
-        .project-desc {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 100%;
-            margin: 0;
-        }
-
-        .project-link {
-            margin-top: 24px;
-            color: var(--primary);
-            font-weight: 500;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .project-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Sections Scroll Fix */
-        section {
-            scroll-margin-top: 100px;
-        }
-
-        /* Skills */
-        .skills-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 80px 0;
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 40px 24px;
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        .skill-index {
-            font-size: 0.75rem;
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .skill-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--white);
-            letter-spacing: -0.2px;
-        }
-
-        /* Footer */
-        .footer {
-            margin: 80px 0 40px;
-            padding: 30px 40px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--white);
-            letter-spacing: 1px;
-        }
-
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--gray-400);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #34c759;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(52, 199, 89, 0.5);
-        }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .social-link {
-            color: var(--gray-400);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-        }
-
-        .social-link:hover {
-            color: var(--white);
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-4px) scale(1.1);
-            box-shadow: 0 10px 25px rgba(0, 113, 227, 0.4);
-            border-color: var(--primary);
-        }
-
-        .social-link svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-row {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .navbar {
-                width: calc(100% - 40px);
-                height: auto;
-                padding: 16px;
-                border-radius: 28px;
-            }
-
-            .navbar-container {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .hero {
-                padding-top: 200px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .skills-row {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-title {
-                font-size: 3.5rem;
-            }
-
-            .footer {
-                flex-direction: column;
-                gap: 24px;
-                text-align: center;
-            }
-
-            .navbar-links {
-                display: flex;
-                gap: 12px;
-                margin-top: 8px;
-            }
-
-            .navbar-links a {
-                font-size: 0.75rem;
-                padding: 4px 8px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WEBLOGIC — Diseño & desarrollo web</title>
+<meta name="description" content="WebLogic. Diseño y desarrollo web: sitios para clínicas, cafeterías, tiendas y proyectos de paisajismo.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23141412' d='M0 0h32v32H0z'/%3E%3Cpath fill='none' stroke='%23e7e4dc' stroke-width='3' d='m5 8 5 16 6-12 6 12 5-16'/%3E%3C/svg%3E">
+<!-- Estilos: paleta, composición, proyectos y adaptación móvil. -->
+<style>
+:root{--ink:#0c0c0b;--paper:#d7d5cd;--muted:#a19f96;--line:#33332f;--sans:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:28px}
+body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.5 var(--sans)}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid currentColor;outline-offset:6px}
+::selection{background:var(--paper);color:var(--ink)}
+.skip{position:fixed;top:-80px;background:var(--paper);color:var(--ink);padding:16px;z-index:20}
+.skip:focus{top:10px}
+.wrap{padding:0 4vw}
+.meta,.footnote{font-size:12px;line-height:1.5}
+.muted{color:var(--muted)}
+header{display:flex;justify-content:space-between;align-items:center;min-height:80px;gap:24px}
+.brand{font-size:15px;font-weight:600;letter-spacing:-.035em}
+nav{display:flex;gap:28px;font-size:14px}
+nav a{padding:12px 0}
+nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.nav-contact{margin-left:44px}
+.hero{padding:95px 0 80px}
+.hero-intro{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.hero-intro p{margin:0;font-size:16px}
+.hero-intro p:last-child{color:var(--muted);font-size:14px;justify-self:end;min-width:230px}
+.hero h1{font-family:Impact,Haettenschweiler,'Arial Narrow',sans-serif;font-size:21.1vw;line-height:1.05;font-weight:400;letter-spacing:-.025em;margin:45px 0 0;transform:scaleX(.86);transform-origin:left bottom;width:116.28%}
+.projects{margin:0 0 110px}
+.section-head{border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;padding-top:15px;margin-bottom:34px}
+.section-head h2{font-size:14px;font-weight:400;margin:0}
+.projects-grid{display:block}
+.project{display:grid;grid-template-columns:1fr 1.65fr;grid-template-rows:auto auto 1fr;column-gap:8vw;padding:48px 0;border-bottom:1px solid var(--line)}
+.project:first-child{padding-top:0}
+.project-preview{grid-column:2;grid-row:1/4;position:relative;overflow:hidden;aspect-ratio:1.5;background:#22231e;container-type:inline-size}
+.project-preview iframe{width:220%;height:220%;border:0;transform:scale(.454545);transform-origin:0 0;pointer-events:none;filter:grayscale(1);transition:filter .4s;position:absolute;inset:0}
+.project:hover iframe,.project:focus-visible iframe{filter:grayscale(0)}
+.project-meta{grid-column:1;grid-row:1;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:60px}
+.project h3{grid-column:1;grid-row:2;font:400 clamp(30px,3.3vw,54px)/1.08 var(--sans);letter-spacing:-.045em;text-transform:uppercase;margin:0 0 20px;max-width:320px}
+.project p{grid-column:1;grid-row:3;color:var(--muted);font-size:16px;max-width:285px;margin:0}
+.project-arrow{font-size:20px}
+.statement{padding:0 4vw 65px;display:grid;grid-template-columns:1fr 1.65fr;gap:8vw}
+.statement h2{font-size:clamp(24px,2.6vw,40px);line-height:1.25;font-weight:400;letter-spacing:-.035em;margin:0}
+.statement p{max-width:500px;font-size:16px;color:var(--muted);margin:25px 0 0}
+.skills{display:grid;grid-template-columns:1fr 1.65fr;gap:8vw;padding-bottom:100px}
+.skills h2{font-size:14px;font-weight:400;margin:5px 0}
+.skills>div:first-child>.meta{display:none}
+.skill{display:grid;grid-template-columns:28px 1fr 1.2fr;gap:15px;align-items:baseline;border-top:1px solid var(--line);padding:18px 0}
+.skill h3{font-size:18px;font-weight:400;margin:0}
+.skill p{font-size:14px;color:var(--muted);margin:0}
+.contact{padding:45px 4vw 25px;background:#191917;color:var(--paper);border-top:1px solid var(--line)}
+.contact-top{display:flex;justify-content:space-between;gap:20px}
+.contact h2{font:400 clamp(40px,6.7vw,110px)/1.1 var(--sans);letter-spacing:-.055em;margin:55px 0 40px}
+.contact-action{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:60px;gap:24px}
+.contact-action p{font-size:16px;margin:0}
+.text-link{font-size:18px;border-bottom:1px solid;padding:0 0 8px;min-width:220px;display:flex;justify-content:space-between;gap:40px}
+.text-link:hover{opacity:.65}
+footer{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:24px;align-items:center}
+footer .brand{font-family:Impact,Haettenschweiler,'Arial Narrow',sans-serif;text-transform:uppercase;font-size:34px;letter-spacing:0}
+
+@media(min-width:1800px){body{max-width:1800px;margin:auto}
+.hero h1{font-size:380px}
+}
+
+@media(max-width:800px){.hero{padding-top:40px}
+.project{column-gap:30px;grid-template-columns:1fr 1.4fr}
+.project-meta{margin-bottom:35px}
+.project-preview{aspect-ratio:1.1}
+.project h3{font-size:32px}
+.statement,.skills{grid-template-columns:1fr 1.4fr;gap:30px}
+.skill{grid-template-columns:22px 1fr}
+.skill p{grid-column:2}
+.nav-contact{margin-left:0}
+}
+
+@media(max-width:540px){.wrap{padding:0 6vw}
+header{min-height:72px}
+nav{gap:20px}
+nav .desktop{display:none}
+.hero{padding:35px 0 40px}
+.hero-intro{grid-template-columns:1fr;gap:10px}
+.hero-intro p:last-child{justify-self:start;font-size:14px}
+.hero h1{font-size:20.5vw;margin-top:40px;line-height:1.1}
+.section-head{margin-bottom:25px}
+.project{display:flex;flex-direction:column;padding:32px 0;gap:0}
+.project-preview{order:2;aspect-ratio:1.35;width:100%;margin:22px 0}
+.project-meta{order:0;margin-bottom:14px}
+.project h3{order:1;font-size:38px;max-width:none;margin:0}
+.project p{order:3;max-width:330px}
+.projects{margin-bottom:65px}
+.statement{padding:0 6vw 35px;grid-template-columns:1fr;gap:22px}
+.statement h2{font-size:27px}
+.statement h2 br{display:none}
+.skills{grid-template-columns:1fr;gap:20px;padding-bottom:55px}
+.skill{grid-template-columns:22px 1fr 1.2fr}
+.skill p{grid-column:3;font-size:13px}
+.contact{padding:25px 6vw}
+.contact-top{flex-direction:column;gap:6px}
+.contact h2{font-size:49px;margin:40px 0 30px}
+.contact-action{flex-direction:column;align-items:flex-start;gap:32px;padding-bottom:45px}
+.text-link{width:100%}
+footer{flex-wrap:wrap}
+.footnote{font-size:12px}
+footer .footnote:nth-child(2){display:none}
+}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*{transition:none!important}
+}
+
+</style>
 </head>
-
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="#" class="navbar-logo">WEBLOGIC</a>
-            <ul class="navbar-links">
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#estudio">Estudio</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-            </ul>
-            <a href="#contacto" class="btn btn-primary">Contactar</a>
-        </div>
-    </nav>
-
-    <main class="container">
-        <!-- Hero Section -->
-        <section class="hero" id="estudio">
-            <h1 class="hero-title">Elegancia a través de la lógica.</h1>
-            <p class="hero-subtitle">En un mundo saturado de ruido, creamos interfaces que susurran perfección y gritan
-                innovación.</p>
-        </section>
-        <!-- Ticker Section -->
-        <div class="ticker-wrap">
-            <div class="ticker">
-                <span class="ticker-item">REACT</span>
-                <span class="ticker-item">NEXT.JS</span>
-                <span class="ticker-item">TYPESCRIPT</span>
-                <span class="ticker-item">NODE.JS</span>
-                <span class="ticker-item">TAILWIND</span>
-                <span class="ticker-item">GRAPHQL</span>
-                <!-- Duplicate for infinite effect -->
-                <span class="ticker-item">REACT</span>
-                <span class="ticker-item">NEXT.JS</span>
-                <span class="ticker-item">TYPESCRIPT</span>
-                <span class="ticker-item">NODE.JS</span>
-                <span class="ticker-item">TAILWIND</span>
-                <span class="ticker-item">GRAPHQL</span>
-            </div>
-        </div>
-
-        <!-- Projects Grid -->
-        <section id="proyectos">
-            <h2 class="section-title">Trabajo Reciente</h2>
-            <div class="projects-grid">
-
-                <a href="https://consultorio-dental-hazel.vercel.app/" target="_blank" class="project-card">
-                    <div class="browser-mockup">
-                        <div class="browser-header">
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                        </div>
-                        <iframe src="https://consultorio-dental-hazel.vercel.app/" loading="lazy"></iframe>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Salud & Bienestar</span>
-                        <h3 class="project-title">CLÍNICA DENTAL</h3>
-                        <p class="project-desc">Sistema de gestión y citas para clínica odontológica.</p>
-                        <span class="project-link">Explorar sitio ↗</span>
-                    </div>
-                </a>
-
-                <a href="https://dandelioncoffee-demo.vercel.app/" target="_blank" class="project-card">
-                    <div class="browser-mockup">
-                        <div class="browser-header">
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                        </div>
-                        <iframe src="https://dandelioncoffee-demo.vercel.app/" loading="lazy"></iframe>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Gastronomía</span>
-                        <h3 class="project-title">DANDELION COFFEE</h3>
-                        <p class="project-desc">Experiencia digital para cafetería de especialidad.</p>
-                        <span class="project-link">Explorar sitio ↗</span>
-                    </div>
-                </a>
-
-                <a href="https://vino-snowy.vercel.app/" target="_blank" class="project-card">
-                    <div class="browser-mockup">
-                        <div class="browser-header">
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                        </div>
-                        <iframe src="https://vino-snowy.vercel.app/" loading="lazy"></iframe>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">E-Commerce</span>
-                        <h3 class="project-title">VINO AURELIA</h3>
-                        <p class="project-desc">Boutique online de vinos seleccionados.</p>
-                        <span class="project-link">Explorar sitio ↗</span>
-                    </div>
-                </a>
-
-                <a href="https://jard-nverde-ghq4.vercel.app/" target="_blank" class="project-card">
-                    <div class="browser-mockup">
-                        <div class="browser-header">
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                            <div class="browser-dot"></div>
-                        </div>
-                        <iframe src="https://jard-nverde-ghq4.vercel.app/" loading="lazy"></iframe>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Paisajismo</span>
-                        <h3 class="project-title">JARDÍN VERDE</h3>
-                        <p class="project-desc">Tienda online de plantas y herramientas de jardinería.</p>
-                        <span class="project-link">Explorar sitio ↗</span>
-                    </div>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- Skills Row -->
-        <section id="habilidades">
-            <div class="skills-row">
-                <div class="skill-card">
-                    <span class="skill-index">01</span>
-                    <h3 class="skill-title">FRONTEND</h3>
-                </div>
-                <div class="skill-card">
-                    <span class="skill-index">02</span>
-                    <h3 class="skill-title">BACKEND</h3>
-                </div>
-                <div class="skill-card">
-                    <span class="skill-index">03</span>
-                    <h3 class="skill-title">DATOS</h3>
-                </div>
-                <div class="skill-card">
-                    <span class="skill-index">04</span>
-                    <h3 class="skill-title">DEPLOY</h3>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer" id="contacto">
-            <div class="footer-logo">WEBLOGIC</div>
-            <div class="social-links">
-                <a href="https://www.instagram.com/weblogic.io/" target="_blank" class="social-link" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                </a>
-            </div>
-            <div class="status">
-                <div class="status-dot"></div>
-                <span>Disponible para nuevos proyectos</span>
-            </div>
-        </footer>
-    </main>
-
+<a href="#contenido" class="skip">Saltar al contenido</a>
+<div class="wrap">
+<header>
+<a href="#" class="brand" aria-label="WebLogic, inicio">WEBLOGIC</a>
+<nav aria-label="Navegación principal">
+<a href="#proyectos">Proyectos</a>
+<a class="desktop" href="#estudio">Estudio</a>
+<a class="desktop" href="#habilidades">Habilidades</a>
+<a href="#contacto" class="nav-contact">Contacto ↗</a>
+</nav>
+</header>
+<main id="contenido">
+<!-- Portada -->
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-intro">
+<p>Diseño y desarrollo web.</p>
+<p>React, Next.js y Node.js.<br>De la interfaz a la publicación.</p>
+</div>
+<h1 id="hero-title">WEBLOGIC</h1>
+</section>
+<!-- Proyectos: cambia los enlaces y las vistas previas juntos. -->
+<section class="projects" id="proyectos">
+<div class="section-head">
+<h2>Proyectos</h2>
+<span class="meta muted">Selección de trabajos</span>
+</div>
+<div class="projects-grid">
+<a class="project" href="https://consultorio-dental-hazel.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Explorar Clínica Dental, abre en otra pestaña">
+<div class="project-preview">
+<iframe src="https://consultorio-dental-hazel.vercel.app/" title="Vista previa del proyecto Clínica Dental" loading="lazy" tabindex="-1">
+</iframe>
+</div>
+<div class="project-meta">
+<span class="meta muted">01 — Salud</span>
+<span class="project-arrow" aria-hidden="true">↗</span>
+</div>
+<h3>Clínica Dental</h3>
+<p>Sistema de gestión y citas para clínica odontológica.</p>
+</a>
+<a class="project" href="https://dandelioncoffee-demo.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Explorar Dandelion Coffee, abre en otra pestaña">
+<div class="project-preview">
+<iframe src="https://dandelioncoffee-demo.vercel.app/" title="Vista previa del proyecto Dandelion Coffee" loading="lazy" tabindex="-1">
+</iframe>
+</div>
+<div class="project-meta">
+<span class="meta muted">02 — Gastronomía</span>
+<span class="project-arrow" aria-hidden="true">↗</span>
+</div>
+<h3>Dandelion Coffee</h3>
+<p>Experiencia digital para cafetería de especialidad.</p>
+</a>
+<a class="project" href="https://vino-snowy.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Explorar Vino Aurelia, abre en otra pestaña">
+<div class="project-preview">
+<iframe src="https://vino-snowy.vercel.app/" title="Vista previa del proyecto Vino Aurelia" loading="lazy" tabindex="-1">
+</iframe>
+</div>
+<div class="project-meta">
+<span class="meta muted">03 — Comercio</span>
+<span class="project-arrow" aria-hidden="true">↗</span>
+</div>
+<h3>Vino Aurelia</h3>
+<p>Boutique online de vinos seleccionados.</p>
+</a>
+<a class="project" href="https://jard-nverde-ghq4.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Explorar Jardín Verde, abre en otra pestaña">
+<div class="project-preview">
+<iframe src="https://jard-nverde-ghq4.vercel.app/" title="Vista previa del proyecto Jardín Verde" loading="lazy" tabindex="-1">
+</iframe>
+</div>
+<div class="project-meta">
+<span class="meta muted">04 — Paisajismo</span>
+<span class="project-arrow" aria-hidden="true">↗</span>
+</div>
+<h3>Jardín Verde</h3>
+<p>Tienda online de plantas y herramientas de jardinería.</p>
+</a>
+</div>
+</section>
+</main>
+</div>
+<section class="statement" id="estudio" aria-labelledby="studio-title">
+<span class="meta">Estudio</span>
+<div>
+<h2 id="studio-title">WebLogic es un estudio<br>de diseño y desarrollo web.</h2>
+<p>Trabajamos en sitios de servicios, experiencias para negocios y tiendas online. Nos ocupamos de la interfaz, la lógica de la aplicación y su publicación.</p>
+</div>
+</section>
+<section class="skills wrap" id="habilidades">
+<div>
+<span class="meta muted">Tecnologías</span>
+<h2>Habilidades</h2>
+</div>
+<div>
+<div class="skill">
+<span class="meta muted">01</span>
+<h3>Frontend</h3>
+<p>React / Next.js<br>TypeScript / Tailwind</p>
+</div>
+<div class="skill">
+<span class="meta muted">02</span>
+<h3>Backend</h3>
+<p>Node.js<br>Lógica de aplicación</p>
+</div>
+<div class="skill">
+<span class="meta muted">03</span>
+<h3>Datos</h3>
+<p>GraphQL<br>Integración de datos</p>
+</div>
+<div class="skill">
+<span class="meta muted">04</span>
+<h3>Deploy</h3>
+<p>Publicación<br>Puesta en producción</p>
+</div>
+</div>
+</section>
+<!-- Contacto: enlace a Instagram. -->
+<section class="contact" id="contacto">
+<div class="contact-top meta">
+<span>Contacto</span>
+<span>Disponible para nuevos proyectos</span>
+</div>
+<h2>¿Tienes un proyecto?</h2>
+<div class="contact-action">
+<p>Escríbenos por Instagram.<br>@weblogic.io</p>
+<a class="text-link" href="https://www.instagram.com/weblogic.io/" target="_blank" rel="noopener noreferrer">Hablemos <span aria-hidden="true">↗</span>
+</a>
+</div>
+<footer>
+<a class="brand" href="#">WEBLOGIC</a>
+<span class="footnote">WebLogic — Diseño y desarrollo</span>
+<a class="footnote" href="#">VOLVER ARRIBA ↑</a>
+</footer>
+</section>
 </body>
-
 </html>
